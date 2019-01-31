@@ -1,0 +1,50 @@
+---
+title: "Leaflet - Lake"
+author: "Paul J."
+date: "January 30, 2019"
+output: html_document
+---
+
+### Introduction
+  Leaflet is one of the most popular Javascript libraries for creating interactive maps. The leaflet R package allows you to create your own leaflet maps without needing to know any Javascript!
+
+### Installation
+```{r, eval=TRUE}
+#install.packages("leaflet")
+library(leaflet)
+```
+
+### Leaflet Map
+```{r, echo=TRUE}
+library(leaflet)
+
+## Latitude and Longitude of Mindanao Map where the Largest Lake in Mindanao is Located.
+
+bmb    <- data.frame( lat = c(7.866497, 9.453501, 6.642141, 7.783736, 6.232600)
+                       , lng = c(124.248491, 125.519310, 124.823697, 124.050781,124.551029) )
+
+## Specific Icon Pop-ups
+
+IconPopups <- c(
+  "<a href='https://lanaodelsur.gov.ph/'>Lake Lanao</a>",
+  "<a href='http://www.surigaodelnorte.gov.ph/'>Lake Mainit</a>",
+  "<a href='http://www.maguindanao.gov.ph/'>Lake Buluan</a>",
+  "<a href='https://lanaodelsur.gov.ph/'>Lake Dapao</a>",
+  "<a href='http://southcotabato.gov.ph/city-municipalities/lake-sebu/'>Lake Sebu</a>"
+)
+LakeIcon <- makeIcon(iconUrl = "https://image.flaticon.com/icons/svg/119/119573.svg", iconWidth = 31*215/230, iconHeight = 31,  iconAnchorX = 31*215/230/2, iconAnchorY = 16 )
+
+mp <- bmb %>% 
+  leaflet() %>%
+  addTiles() %>% setView(lng = 124.8472, lat = 6.2245,  zoom = 10) %>% 
+  addMarkers(icon=LakeIcon, popup = IconPopups)
+mp
+
+```
+
+#### Largest Lake in Mindanao
+- Lake Lanao
+- Lake Mainit
+- Lake Buluan
+- Lake Dapao
+- Lake Sebu
